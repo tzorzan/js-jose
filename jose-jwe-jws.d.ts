@@ -91,10 +91,22 @@ interface IHeaders {
     crit?: string[];
 }
 
+interface IBase64Url {
+    encode(str: string): string;
+    encodeArray(arr: Array<number> | Uint8Array | ArrayBuffer): string;
+    decode(str: string): string;
+    decodeArray(arr: Array<number> | Uint8Array | ArrayBuffer): string;
+}
+
 interface IUtils {
+    arrayFromString(str: string): Uint8Array;
+    arrayFromUtf8String(str: string): Uint8Array;
+    stringFromArray(arr: ArrayBuffer): string;
+    utf8StringFromArray(arr: ArrayBuffer): string;
     importRsaPublicKey(rsa_key: JWKRSA, alg: JoseAlgorithm): PromiseLike<CryptoKey>;
     importRsaPrivateKey(rsa_key: JWKRSA, alg: JoseAlgorithm): PromiseLike<CryptoKey>;
     importPublicKey(key: IJsonWebKey, alg: JoseAlgorithm): PromiseLike<CryptoKey>;
+    Base64Url: IBase64Url;
 }
 
 interface IJose {
