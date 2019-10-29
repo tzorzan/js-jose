@@ -40,7 +40,7 @@ interface IWebCryptographer {
     wrapCek(): PromiseLike<ArrayBuffer>;
     unwrapCek(): PromiseLike<ArrayBuffer>;
     encrypt(iv: Uint8Array, aad: Uint8Array, cek: CryptoKey | PromiseLike<CryptoKey>, plaintext: Uint8Array): PromiseLike<IEncryptionResult>;
-    decrypt(cek: CryptoKey | PromiseLike<CryptoKey>, aad: Uint8Array, iv: Uint8Array, ciphertext: Uint8Array, tag: Uint8Array): PromiseLike<string>;
+    decrypt(cek: CryptoKey | PromiseLike<CryptoKey>, aad: Uint8Array, iv: Uint8Array, ciphertext: Uint8Array, tag: Uint8Array): PromiseLike<ArrayBuffer>;
     sign(aad: Object, payload: string | Object, key: CryptoKey | PromiseLike<CryptoKey>): PromiseLike<ArrayBuffer>;
     verify(aad: string, payload: string, signature: Uint8Array, key: CryptoKey | PromiseLike<CryptoKey>, kid: string): PromiseLike<IVerificationResult>;
 }
@@ -92,10 +92,11 @@ interface IHeaders {
 }
 
 interface IBase64Url {
+    new(): IBase64Url;
     encode(str: string): string;
     encodeArray(arr: Array<number> | Uint8Array | ArrayBuffer): string;
     decode(str: string): string;
-    decodeArray(arr: Array<number> | Uint8Array | ArrayBuffer): string;
+    decodeArray(arr: Array<number> | Uint8Array | ArrayBuffer): Uint8Array;
 }
 
 interface IUtils {
