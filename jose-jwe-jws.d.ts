@@ -148,7 +148,7 @@ interface IJoseJWS {
 interface IEncrypter {
     new(cryptographer: IWebCryptographer, pubkey: CryptoKey | PromiseLike<CryptoKey>): IEncrypter;
     addHeader(k: string, v: string): void;
-    encrypt(plaintext: string): PromiseLike<string>;
+    encrypt(plaintext: string | Uint8Array): PromiseLike<string>;
 }
 
 interface IDecrypter {
